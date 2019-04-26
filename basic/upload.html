@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <title>Log In: Data Science Course</title>
+    <title>Upload: Data Science Course</title>
 
     <!-- Styles -->
     <link href="assets/css/page.min.css" rel="stylesheet">
@@ -60,30 +60,29 @@ departments.">
 
 
     <!-- Header -->
-    <section class="section py-10" style="background-image: url(assets/img/login.jpg)" data-overlay="5">
+    <section class="section py-8" style="background-image: url(assets/img/upload.jpg)" data-overlay="5">
 
         <div class="container">
-          <h2 class="text-white text-center lead-6">Welcome to CS513</h2>
-          <p class="text-white text-center opacity-70 lead">Start to explore the course.</p>
+          <h2 class="text-white text-center lead-6">Upload the Assignment</h2>
+          <p class="text-white text-center opacity-60 lead">These assignments really help the students</p>
           <br>
 
           <div class="row">
             <form class="col-11 col-md-6 col-xl-5 mx-auto section-dialog bg-gray p-5 p-md-7">
               <div class="form-group input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fa fa-user fa-fw"></i></span>
-                </div>
-                <input type="text" class="form-control" placeholder="Username">
+                <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" accept=".pdf,.docx,.doc,.pptx,.ppt">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+              </div>
               </div>
 
               <div class="form-group input-group input-group-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fa fa-key fa-fw"></i></span>
-                </div>
-                <input type="password" class="form-control" placeholder="Password">
+                <div class="form-group">
+                <textarea class="form-control" placeholder="About the assignment" rows="3"></textarea>
+              </div>
               </div>
 
-              <button class="btn btn-block btn-lg btn-success">Log in</button>
+              <button class="btn btn-block btn-lg btn-success">Upload</button>
             </form>
           </div>
 
