@@ -1,0 +1,33 @@
+CREATE DATABASE DB;
+USE DB;
+CREATE TABLE People ( id smallint unsigned not null auto_increment, username varchar(20) not null,rollnumber mediumint(50) not null,webmail varchar(100), password varchar(20) not null, constraint pk_example primary key (id) );
+
+INSERT INTO People ( id, username, password) VALUES ( null, 'RaviShankar', 'ravishankar' );
+INSERT INTO People ( id, username, password) VALUES ( null, 'MananGupta', 'manangupta' );
+INSERT INTO People ( id, username, password) VALUES ( null, 'PiyushGupta', 'piyushgupta' );
+
+
+
+CREATE TABLE UploadAssignment ( id smallint unsigned not null auto_increment, path varchar(200) not null, constraint pk_example primary key (id) );
+
+
+
+
+
+CREATE TABLE UploadNotices ( id smallint unsigned not null auto_increment, path varchar(200) not null,about varchar(50) not null,bywhom varchar(50) not null, constraint pk_example primary key (id) );
+
+
+CREATE TABLE Advertisement ( id smallint unsigned not null auto_increment,about varchar(50) not null,bywhom varchar(50) not null,topic varchar(100) not null, constraint pk_example primary key (id) );
+
+
+
+CREATE TABLE Applicant ( username varchar(50) not null,appnum varchar(50) not null ,firstname varchar(50) not null,secondname varchar(50) not null,gatescore smallint unsigned not null,
+email varchar(50) not null,prevcolledge varchar(50) not null,constraint pk_example primary key (username) );
+
+
+CREATE TABLE Registration (id smallint unsigned not null auto_increment,value smallint unsigned , constraint pk_example primary key (id));
+INSERT INTO Registration ( id,value) VALUES ( null,0);
+
+CREATE TABLE Selection (id smallint unsigned not null auto_increment,value smallint unsigned , constraint pk_example primary key (id));
+INSERT INTO Selection ( id,value) VALUES ( null,0);
+
