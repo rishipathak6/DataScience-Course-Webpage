@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 29, 2019 at 03:46 PM
+-- Generation Time: May 01, 2019 at 01:50 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -73,6 +73,27 @@ INSERT INTO `Applicant` (`username`, `appnum`, `firstname`, `secondname`, `gates
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ExtraInfo`
+--
+
+CREATE TABLE `ExtraInfo` (
+  `fieldname` varchar(50) NOT NULL,
+  `usefield` smallint(6) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ExtraInfo`
+--
+
+INSERT INTO `ExtraInfo` (`fieldname`, `usefield`) VALUES
+('Address', 1),
+('Blood Group', 0),
+('BTech Colledge', 0),
+('Permanent Address', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `People`
 --
 
@@ -89,8 +110,8 @@ CREATE TABLE `People` (
 --
 
 INSERT INTO `People` (`username`, `password`, `designation`, `rollnumber`, `webmail`) VALUES
-('MananGupta', 'manangupta', 'staff', 0, ''),
-('RaviShankar', 'ravishankar', 'faculty', 0, '');
+('Faculty', 'faculty', 'faculty', 1, 'facultycse@iitg.ac.in'),
+('Staff', 'staff', 'staff', 2, 'staffcse@iitg.ac.in');
 
 -- --------------------------------------------------------
 
@@ -187,6 +208,12 @@ ALTER TABLE `Advertisement`
 --
 ALTER TABLE `Applicant`
   ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `ExtraInfo`
+--
+ALTER TABLE `ExtraInfo`
+  ADD PRIMARY KEY (`fieldname`);
 
 --
 -- Indexes for table `People`

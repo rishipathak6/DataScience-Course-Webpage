@@ -26,7 +26,7 @@
               header("location: dashboard_staff.php");  
           }
        }else {
-          $error = "Your Login Name or Password is invalid";
+          echo '<script language="javascript">alert("Username And Password Not Valid"); window.location.href = "login.php"</script>';
        }
     }
     ?>
@@ -68,7 +68,7 @@ departments.">
 
               <div class="navbar-left">
                 <button class="navbar-toggler" type="button">&#9776;</button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.php">
                   <img class="logo-dark" src="assets/img/iitglogo.png" height="50px" width="50px" alt="logo">
                   <img class="logo-light" src="assets/img/iitglogolight.png" height="50px" width="50px" alt="logo">
                 </a>
@@ -76,7 +76,7 @@ departments.">
 
               <section class="navbar-mobile">
                 <nav class="nav nav-navbar ml-auto">
-                  
+                    <a class="btn btn-sm btn-round btn-primary ml-lg-4 mr-2" href="index.php">HomePage</a>
                 </nav>
 
                 

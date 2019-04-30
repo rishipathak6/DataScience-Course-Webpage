@@ -1,63 +1,38 @@
 <?php
     include('Session.php');
-    if ($login_designation != "staff"){
+    if ($login_designation != "faculty"){
         if($login_designation == "student"){
             header("location:dashboard_student.php");
-        }else if($login_designation == "faculty"){
-            header("location:dashboard_faculty.php");
+        }else if($login_designation == "staff"){
+            header("location:dashboard_staff.php");
         }else {
             header("location:login.php");
         }
     }
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        echo '<script language="javascript">alert("Sorry Network Connection Is Very Slow! Mail Not Sent"); window.location.href = "sendgrade.php"</script>';
-    }
-
-    if($_SERVER["REQUEST_METHOD"] == "POSTY") {
-      	if(!empty($_FILES['attachedfiles']['name'])){
-            $file_name = $_FILES['attachedfiles']['name'];
-            $temp_name = $_FILES['attachedfiles']['tmp_name'];
-            $file_type = $_FILES['attachedfiles']['type'];
-
-            $from = $_POST['email'];
-            $to = $_POST['towhom'];
-            $subject = "Grades Of The Students";
-            $message = $_POST['message'];
-
-            $file = $temp_name;
-            $content = chunk_split(base64_encode(file_get_contents($file)));
-            $uid = md5(uniqid(time()));
-
-            $header = "From: ".$from."\r\n";
-            $header .= "Reply-To: ".$replyto."\r\n";
-            $header .= "MIME-Version: 1.0\r\n";
-
-            $header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"\r\n\r\n";
-            $header .= "This is a multi-part message in MIME format.\r\n";
-
-
-            $header .= "--".$uid."\r\n";
-            $header .= "Content-Type:text/plain; charset=iso-8859-1\r\n";
-            $header .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
-            $header .= $message."\r\n\r\n";
-
-            $header .= "--".$uid."\r\n";
-            $header .= "Content-Type: ".$file_type."; name=\"".$file_name."\"\r\n";
-            $header .= "Content-Transfer-Encoding: base64\r\n";
-            $header .= "Content-Disposition: attachment; filename=\"".$file_name."\"\r\n\r\n";
-            $header .= $content."\r\n\r\n";
-
-            if(mail($to, $subject,"", $header)){
-                echo "Mail Sent";
+        if( $_POST["fieldname"] == ""){
+            echo '<script language="javascript">alert("Please Enter Some Field Name");windows.location.href="showform.php"</script>';
+        }
+      	elseif (isset($_POST['add'])) {
+           $qry = mysqli_query($db,"INSERT INTO `ExtraInfo`(`fieldname`) VALUES ('".$_POST["fieldname"]."')");
+           if($qry){
+              echo '<script language="javascript">alert("Field Name Added"); window.location.href = "showform.php"</script>'; 
             }else{
-                echo "Mail Not Sent, Server Busy";
+              $x = $_POST["fieldname"];
+              $y = 0;
+              $uquery = mysqli_query($db,"UPDATE `ExtraInfo` SET usefield ='$y' WHERE fieldname='$x'");
+              echo '<script language="javascript">alert("Field Name Added"); window.location.href = "showform.php"</script>'; 
             }
-        }else{
-            echo "Please Attach Some Files";
+        }
+        elseif (isset($_POST['remove'])) {
+            $x = $_POST["fieldname"];
+            $y = 1;
+            $uquery = mysqli_query($db,"UPDATE `ExtraInfo` SET usefield ='$y' WHERE fieldname='$x'");
+            echo '<script language="javascript">alert("Field Name Removed"); window.location.href = "showform.php"</script>'; 
         }
     }
     ?>
-
+    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -103,8 +78,8 @@ departments.">
 
               <section class="navbar-mobile">
                 <nav class="nav nav-navbar ml-auto">
-                  
-                   <a class="btn btn-sm btn-round btn-primary ml-lg-4 mr-2" href="https://outlook.office.com/mail/inbox" target="_blank">Send Mail Using Outlook</a>
+                  <a class="btn btn-sm btn-round btn-primary ml-lg-4 mr-2" href="showform.php">View Form</a>
+                  <a class="btn btn-sm btn-round btn-primary ml-lg-4 mr-2" href="dashboard_faculty.php">DashBoard</a>
                 </nav>
 
                 
@@ -124,33 +99,22 @@ departments.">
     <section class="section py-8" style="background-image: url(assets/img/upload.jpg)" data-overlay="5">
 
         <div class="container">
-          <h2 class="text-white text-center lead-6">Email Facility</h2>
-          <p class="text-white text-center opacity-80 lead-2">You can send mail to anywhere everywhere</p>
+          <h2 class="text-white text-center lead-6">Create The Registration Form</h2>
+          <p class="text-white text-center opacity-80 lead-2">Once the form is created, applicants can register</p>
           <br>
 
           <div class="row">
-            <form class="col-11 col-md-6 col-xl-5 mx-auto section-dialog bg-gray p-5 p-md-7" method="POST" enctype="multipart/form-data">
-
-
-              <div class="form-group input-group input-group-lg">
-                <div class="form-group">
-                <input class="form-control" placeholder="Send Message To" name="towhom" type="text">
-              </div>
-              </div>
-              <div class="form-group input-group input-group-lg">
-                <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFile" name="attachedfiles" accept="application/pdf">
-                <label class="custom-file-label" for="customFile">Attach file</label>
-              </div>
-              </div>
+            <form class="col-11 col-md-6 col-xl-5 mx-auto section-dialog bg-gray p-5 p-md-7" method="POST">
 
               <div class="form-group input-group input-group-lg">
                 <div class="form-group">
-                <textarea class="form-control" placeholder="Message" name="message" rows="3"></textarea>
+                <input class="form-control" placeholder="Field Name (Please Be Exact)" name="fieldname" type="text">
               </div>
               </div>
 
-              <button class="btn btn-block btn-lg btn-success">Send Mail</button>
+
+              <button class="btn btn-block btn-lg btn-success" name="add">Add Field</button>
+              <button class="btn btn-block btn-lg btn-success" name="remove">Remove Field</button>
             </form>
           </div>
 
@@ -211,8 +175,6 @@ departments.">
 
 </body>
 </html>
-
-
 
 
 

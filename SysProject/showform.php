@@ -1,34 +1,14 @@
 <?php
-   include('MyConfig.php');
-   $op = 1;
-     $myqry = mysqli_query($db,"SELECT * FROM `Selection` WHERE id='$op'");
-     $mydata = mysqli_fetch_array($myqry,MYSQLI_ASSOC);
-     if($mydata['value'] == 1){
-         header("location:index.php");
-     }
-
-   $qry = mysqli_query($db,"SELECT * FROM `Applicant`");
-   $curr = mysqli_num_rows($qry);
-   $applicationnumber = 190101000 + $curr;
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $firstname = $_POST["firstname"];
-        $secondname = $_POST["secondname"];
-        $gatescore = $_POST["gatescore"];
-        $appnum = $applicationnumber;
-        $username = $_POST["username"];
-        $email = $_POST["email"];
-        $prevcolledge = $_POST["prevcolledge"];
-        $insertqry = mysqli_query($db,"INSERT INTO `Applicant`(`username`,`appnum`,`firstname`,`secondname`,`gatescore`,`email`,`prevcolledge`)VALUES('".$username."','".$appnum."','".$firstname."','".$secondname."','".$gatescore."','".$email."','".$prevcolledge."')");
-        if($insertqry){
-          echo '<script language="javascript">alert("Registration Successful");
-          windows.location.href="registration_form.php"</script>';
-        }else{
-          echo '<script language="javascript">alert("This Username is Taken");
-          windows.location.href="registration_form.php"</script>';
+   include('Session.php');
+    if ($login_designation != "faculty"){
+        if($login_designation == "student"){
+            header("location:dashboard_student.php");
+        }else if($login_designation == "staff"){
+            header("location:dashboard_staff.php");
+        }else {
+            header("location:login.php");
         }
     }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +62,7 @@ departments.">
                 <span class="navbar-divider"></span>
 
                 <div>
-                  <a class="btn btn-sm btn-round btn-primary ml-lg-4 mr-2" href="index.php">Homepage</a>
+                  <a class="btn btn-sm btn-round btn-primary ml-lg-4 mr-2" href="extrafields.php">Edit Registration Form</a>
                 </div>
               </section>
 
@@ -105,7 +85,7 @@ departments.">
 
             <div class="form-group">
           <label class="lead-1 fw-600">Application Number</label>
-          <input class="form-control" type="text" name="appnum" disabled="true" value = "<?php echo (isset($applicationnumber))?$applicationnumber:'';?>">
+          <input class="form-control" type="text" name="appnum" disabled="true" placeholder = "Some Registration Form Number Here">
           </div>
               	<div class="form-group">
 					<label class="fw-600 lead-1">First Name</label>
@@ -126,18 +106,6 @@ departments.">
 					<label class="lead-1 fw-600">Username</label>
 					<input class="form-control" name="username" type="text" placeholder="Username" required="true">
 				</div>
-				
-				<!-- <div class="form-group">
-					<label class="lead-1 fw-600">Password</label>
-					<input class="form-control" type="password" placeholder="Password">
-				</div>
-				
-				<div class="form-group">
-					<label class="lead-1 fw-600">Confirm Password</label>
-					<input class="form-control is-invalid" type="password" placeholder="Confirm Password">
-					<div class="invalid-feedback">Passwords don't match.</div>
-				</div> -->
-				
 				<div class="form-group">
 					<label class="lead-1 fw-600">GATE score</label>
 					<input class="form-control" type="text" name="gatescore" placeholder="GATE score" required="true">
@@ -146,7 +114,6 @@ departments.">
           <label class="lead-1 fw-600">Previous Colledge</label>
           <input class="form-control" type="text" name="prevcolledge" placeholder="Previous Colledge" required="true">
         </div>
-        
         <?php
                   $x = 0;
                   $qry = mysqli_query($db,"SELECT * FROM `ExtraInfo` WHERE usefield = '$x'");
@@ -160,7 +127,6 @@ departments.">
                   }
                     
         ?>          
-        
 
           <button class="btn btn-block btn-lg btn-success">Register</button>
             </form>

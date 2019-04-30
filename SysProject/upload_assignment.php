@@ -66,7 +66,7 @@ departments.">
 
               <div class="navbar-left">
                 <button class="navbar-toggler" type="button">&#9776;</button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.php">
                   <img class="logo-dark" src="assets/img/iitglogo.png" height="50px" width="50px" alt="logo">
                   <img class="logo-light" src="assets/img/iitglogolight.png" height="50px" width="50px" alt="logo">
                 </a>

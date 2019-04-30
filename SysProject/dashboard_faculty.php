@@ -47,7 +47,7 @@ departments.">
 
               <div class="navbar-left">
                 <button class="navbar-toggler" type="button">&#9776;</button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.php">
                   <img class="logo-dark" src="assets/img/iitglogo.png" height="50px" width="50px" alt="logo">
                   <img class="logo-light" src="assets/img/iitglogolight.png" height="50px" width="50px" alt="logo">
                 </a>
@@ -119,7 +119,7 @@ departments.">
 				  <div class="card text-white justify-content-end bg-img h-400" style="background-image: url(assets/img/registration.jpg); " data-scrim-bottom="5">
 					  <a href="#">
 					<div class="card-body flex-grow-0">
-					  <h3 class="card-title fw-200 text-center">Create Registration form</h3>
+					  <a href="extrafields.php"><h3 class="card-title fw-200 text-center">Create Registration form</h3></a>
 					 
 					</div>
 					  </a>
